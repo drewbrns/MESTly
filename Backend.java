@@ -128,7 +128,7 @@ public class Backend
 
 			}
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 
 		records = content.split(";");
