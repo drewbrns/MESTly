@@ -144,13 +144,17 @@ public class Backend
 
 	static void outputInfo (String record, String filename) {
 
+		PrintWriter out = null;
+
 		try {
-		    PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(filename, true)));
+		    out = new PrintWriter(new BufferedWriter(new FileWriter(filename, true)));
 		    out.write(record);
 		} catch (IOException e) {
 		    System.out.println("Sorry something went wrong, could not save your data.");
 		} finally {
-			out.close();
+			if (out != null){
+				out.close();
+			}
 		}
 
 	}	
