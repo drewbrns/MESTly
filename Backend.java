@@ -237,7 +237,7 @@ public class Backend
 
 	static boolean validateURL(String url){
 
-		if (url.matches("^(http://){1}([w]{3}\\.)?[a-z]+(\\.[a-z]{2,3})$")){
+		if (url.matches("^(http://)?[w]{3}\\.[a-z]+(\\.[a-z]{2,3})$")){
 			return true;
 		} 
 
