@@ -103,8 +103,6 @@ public class Backend
 				System.out.println("Username or password did not match.");
 			}
 			
-
-			
 		} else {
 
 			System.out.println("Please enter 'y' or 'n' ");
@@ -121,8 +119,7 @@ public class Backend
 
 		String content = "";
 
-		try
-		{
+		try{
 			Scanner textScanner = new Scanner(userDB);
 
 			while (textScanner.hasNextLine()){
@@ -130,9 +127,7 @@ public class Backend
 				content+=textScanner.nextLine();
 
 			}
-		}
-		catch (FileNotFoundException e)
-		{
+		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 
@@ -229,7 +224,6 @@ public class Backend
 		} 
 
 		return  false;
-
 	}
 
 	static boolean validateGithubUserName(String ghUsername){
@@ -239,7 +233,6 @@ public class Backend
 		} 
 
 		return  false;
-
 	}
 
 	static boolean validateURL(String url){
@@ -249,7 +242,6 @@ public class Backend
 		} 
 
 		return  false;
-
 	}
 
 	static boolean validateNameWithSpaces(String input){
@@ -259,7 +251,6 @@ public class Backend
 		} 
 
 		return  false;		
-
 	}
 
 	static boolean validatePhoneNumber(String phoneNumber){
@@ -269,7 +260,6 @@ public class Backend
 		} 
 
 		return  false;
-
 	}		
 
 	static String storeUser(String email, String password, String firstName, String lastName) {
