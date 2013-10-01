@@ -7,7 +7,7 @@ public class DemoMain
 
 		backend.userMenu();
 
-		// if (backend.validateNameWithSpaces("Meltwater Ent. Sch. of Tech")){
+		// if (backend.validateAlphaNumSpace("Meltwater Ent. Sch. of Tech")){
 		// 	System.out.println("it matches");
 		// } else {
 		// 	System.out.println("it doesn't match");

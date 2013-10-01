@@ -20,22 +20,22 @@ public class Backend
 
 			String firstName = askForStringInput("Please enter your first name: ");
 
-			boolean nameIsValid = validateName(firstName);
+			boolean nameIsValid = validateAlpha(firstName);
 
 			while (!nameIsValid){
 
 				firstName = askForStringInput("Oops you made a mistake, please re-enter first your name:");
-				nameIsValid = validateName(firstName);
+				nameIsValid = validateAlpha(firstName);
 			}
 
 			String lastName  = askForStringInput("Please enter your last name: ");
 
-			nameIsValid = validateName(lastName);
+			nameIsValid = validateAlpha(lastName);
 
 			while (!nameIsValid){
 
 				lastName = askForStringInput("Oops you made a mistake, please re-enter last your name:");
-				nameIsValid = validateName(lastName);
+				nameIsValid = validateAlpha(lastName);
 			}
 
 			email = askForStringInput("Please enter your email address: ");
@@ -170,15 +170,6 @@ public class Backend
 		return false; 
 	}
 
-	static boolean validatePassword (String password1, String password2) { 
-
-		if (password1.equals(password2)){
-			return true;
-		}
-
-		return false;
-	}
-
 	 static String encryptPassword (String password){
 
 		String hashed = BCrypt.hashpw(password, BCrypt.gensalt());
@@ -197,7 +188,40 @@ public class Backend
 
 	}	 	
 
-	//Validation-----------------------
+	//Validation
+
+	//*** HELPER METHODS ***
+
+	//use this method to validate names (first and last)
+	static boolean validateAlpha(String name) { 
+
+		if (name.matches("[a-zA-Z]+")){
+			return true;
+		} 
+
+		return  false;
+	}
+	//use this method to validate twitter and github
+	static boolean validateAlphaNum(String input) { 
+
+		if (input.matches("^@?[a-zA-Z0-9_\\.]+")){
+			return true;
+		} 
+
+		return  false;
+	}
+
+	//use this method to validate university, major, company, and title
+	static boolean validateAlphaNumSpace(String input){
+
+		if (input.matches("^[\\w\\.\\s_]+[\\w\\.]+$")){
+			return true;
+		} 
+
+		return  false;		
+	}
+
+	//use this method to validate appropriately formed email addresses
 	static boolean validateEmail (String email) { 
 
 		if (email.matches("^[a-z\\.]+[a-z]+@[a-z]+(\\.[a-z]{2,3})$"))
@@ -208,54 +232,31 @@ public class Backend
 		return false; 
 	}
 
-	static boolean validateName (String name){
+	//use this method to check if the two user entered passwords are the same
+	static boolean validatePassword (String password1, String password2) { 
 
-		if (name.matches("[a-zA-Z]+")){
+		if (password1.equals(password2)){
+			return true;
+		}
+
+		return false;
+	}
+
+	//use this method to validate a properly formed website
+	static boolean validateWebsite(String input) { 
+
+		if (input.matches("^(http://)?[w]{3}\\.[a-z]+(\\.[a-z]{2,3})$")){
 			return true;
 		} 
 
 		return  false;
 	}
 
-	static boolean validateTwitterHandle(String tHandle){
 
-		if (tHandle.matches("^@[a-zA-Z0-9_\\.]+")){
-			return true;
-		} 
+	//use this method to validate a phone number
+	static boolean validatePhoneNumber(String input) { 
 
-		return  false;
-	}
-
-	static boolean validateGithubUserName(String ghUsername){
-
-		if (ghUsername.matches("[a-zA-Z0-9_]+")){
-			return true;
-		} 
-
-		return  false;
-	}
-
-	static boolean validateURL(String url){
-
-		if (url.matches("^(http://)?[w]{3}\\.[a-z]+(\\.[a-z]{2,3})$")){
-			return true;
-		} 
-
-		return  false;
-	}
-
-	static boolean validateNameWithSpaces(String input){
-
-		if (input.matches("^[\\w\\.\\s_]+[\\w\\.]+$")){
-			return true;
-		} 
-
-		return  false;		
-	}
-
-	static boolean validatePhoneNumber(String phoneNumber){
-
-		if (phoneNumber.matches("^[0-9]{3}-[0-9]{3}-[0-9]{4}$")){
+		if (input.matches("^[0-9]{3}-[0-9]{3}-[0-9]{4}$")){
 			return true;
 		} 
 
@@ -275,72 +276,72 @@ public class Backend
 			
 			 String twitterHandle = askForStringInput("Please enter your twitter handle (don't forget the '@'): ");
 
-			 boolean inputIsValid = validateTwitterHandle(twitterHandle);
+			 boolean inputIsValid = validateAlphaNum(twitterHandle);
 
 			 while (!inputIsValid){
 
 				twitterHandle = askForStringInput("Oops you made a mistake, please re-enter first your handle: ");
-				inputIsValid = validateTwitterHandle(twitterHandle);
+				inputIsValid = validateAlphaNum(twitterHandle);
 			 }	
 
 			 String ghUsername = askForStringInput("Please enter your GitHub username: ");
 
-			 inputIsValid = validateGithubUserName(ghUsername);
+			 inputIsValid = validateAlphaNum(ghUsername);
 
 			 while (!inputIsValid){
 
 				ghUsername = askForStringInput("Oops you made a mistake, please re-enter your GitHub username: ");
-				inputIsValid = validateGithubUserName(ghUsername);
+				inputIsValid = validateAlphaNum(ghUsername);
 			 }
 
 			String websiteName = askForStringInput("Please enter your website address: ");
 
-			inputIsValid = validateURL(websiteName);
+			inputIsValid = validateWebsite(websiteName);
 
 			while (!inputIsValid){
 
 				websiteName = askForStringInput("Oops you made a mistake, please re-enter website address: ");
-				inputIsValid = validateURL(websiteName);
+				inputIsValid = validateWebsite(websiteName);
 			}
 
 			String universityName = askForStringInput("Please enter your university name: ");
 
-			inputIsValid = validateNameWithSpaces(universityName);
+			inputIsValid = validateAlphaNumSpace(universityName);
 
 			while (!inputIsValid){
 
 				universityName = askForStringInput("Oops you made a mistake, please re-enter your university name: ");
-				inputIsValid = validateNameWithSpaces(universityName);
+				inputIsValid = validateAlphaNumSpace(universityName);
 			}
 
 			String majorName = askForStringInput("Please enter your major name: ");
 
-			inputIsValid = validateNameWithSpaces(majorName);
+			inputIsValid = validateAlphaNumSpace(majorName);
 
 			while (!inputIsValid){
 
 				majorName = askForStringInput("Oops you made a mistake, please re-enter your major name: ");
-				inputIsValid = validateNameWithSpaces(majorName);
+				inputIsValid = validateAlphaNumSpace(majorName);
 			}
 
 			String currentCompany = askForStringInput("Please enter your current company: ");
 
-			inputIsValid = validateName(currentCompany);
+			inputIsValid = validateAlpha(currentCompany);
 
 			while (!inputIsValid){
 
 				currentCompany = askForStringInput("Oops you made a mistake, please re-enter current company: ");
-				inputIsValid = validateNameWithSpaces(currentCompany);
+				inputIsValid = validateAlphaNumSpace(currentCompany);
 			}
 
 			String currentTitle = askForStringInput("Please enter your current title: ");
 
-			inputIsValid = validateNameWithSpaces(currentTitle);
+			inputIsValid = validateAlphaNumSpace(currentTitle);
 
 			while (!inputIsValid){
 
 				currentTitle = askForStringInput("Oops you made a mistake, please re-enter your current title: ");
-				inputIsValid = validateNameWithSpaces(currentTitle);
+				inputIsValid = validateAlphaNumSpace(currentTitle);
 			}
 
 			String phoneNumber = askForStringInput("Please enter your phone number (use format: ###-###-####): ");
