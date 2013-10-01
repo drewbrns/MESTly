@@ -142,6 +142,19 @@ public class Backend
 
 	}
 
+	static void outputInfo (String record, String filename) {
+
+		try {
+		    PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(filename, true)));
+		    out.write(record);
+		} catch (IOException e) {
+		    System.out.println("Sorry something went wrong, could not save your data.");
+		} finally {
+			out.close();
+		}
+
+	}	
+
 	static boolean checkExistingUser (String email, String [] userInfo) { 
 
 		String [] records = new String[100];
@@ -364,20 +377,6 @@ public class Backend
 	    	result += "Title: "+currentTitle+",Phone: "+phoneNumber+";";
 
 		 return result; 
-	}
-
-
-	static void outputInfo (String record, String filename) {
-
-		try {
-		    PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(filename, true)));
-		    out.write(record);
-		} catch (IOException e) {
-		    System.out.println("Sorry something went wrong, could not save your data.");
-		} finally {
-			out.close();
-		}
-
 	}
 
 	//this method takes user provided email, password, and user info and checks it against the data from the user.csv file
