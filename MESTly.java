@@ -1,15 +1,15 @@
 import java.io.*;
 import java.util.*;
 
-public class Backend
+public class MESTly
 {
 
 	static final String USERS_DB = "users.csv";
 	static final String PROFILES_DB = "info.csv";
 	static public String email = "";
 
-	static void userMenu() {
-
+	public static void main(String[] args) {
+		
 		System.out.print("Are you a new user (y / n)?: ");
 
 		Scanner scanner = new Scanner(System.in);
@@ -81,6 +81,7 @@ public class Backend
 												
 			outputInfo(storeUserInfo(), PROFILES_DB); //Store User Profile Info.
 
+			System.out.println("Thank you for signing up.");
 
 		} else if (input.equals("n")) {
 
@@ -108,7 +109,7 @@ public class Backend
 			System.out.println("Please enter 'y' or 'n' ");
 		}
 
-
+		System.exit(0);
 	}
 
 	static String [] readInputFile (String filename) { 
