@@ -372,9 +372,10 @@ public class Backend
 		try {
 		    PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(filename, true)));
 		    out.write(record);
-		    out.close();
 		} catch (IOException e) {
-		    
+		    System.out.println("Sorry something went wrong, could not save your data.");
+		} finally {
+			out.close();
 		}
 
 	}
