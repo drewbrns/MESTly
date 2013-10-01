@@ -355,7 +355,7 @@ public class MESTly
 				inputIsValid = validatePhoneNumber(phoneNumber);
 			}	
 
-			String result = email+",twitter: "+twitterHandle+",";
+			String result = email+",Twitter: "+twitterHandle+",";
 
 			result += "Github: "+ghUsername+",Website: "+websiteName+",";
 
