@@ -12,103 +12,103 @@ public class Backend
 
 		System.out.print("Are you a new user (y / n)?: ");
 
-	    Scanner scanner = new Scanner(System.in);
+		Scanner scanner = new Scanner(System.in);
 
-	    String input = scanner.nextLine();		
+		String input = scanner.nextLine();		
 
-	    if (input.equals("y")){
+		if (input.equals("y")){
 
-	    	String firstName = askForStringInput("Please enter your first name: ");
+			String firstName = askForStringInput("Please enter your first name: ");
 
-	    	boolean nameIsValid = validateName(firstName);
+			boolean nameIsValid = validateName(firstName);
 
-	    	while (!nameIsValid){
+			while (!nameIsValid){
 
-	    		firstName = askForStringInput("Oops you made a mistake, please re-enter first your name:");
-	    		nameIsValid = validateName(firstName);
-	    	}
+				firstName = askForStringInput("Oops you made a mistake, please re-enter first your name:");
+				nameIsValid = validateName(firstName);
+			}
 
-	    	String lastName  = askForStringInput("Please enter your last name: ");
+			String lastName  = askForStringInput("Please enter your last name: ");
 
-	    	nameIsValid = validateName(lastName);
+			nameIsValid = validateName(lastName);
 
-	    	while (!nameIsValid){
+			while (!nameIsValid){
 
-	    		lastName = askForStringInput("Oops you made a mistake, please re-enter last your name:");
-	    		nameIsValid = validateName(lastName);
-	    	}
+				lastName = askForStringInput("Oops you made a mistake, please re-enter last your name:");
+				nameIsValid = validateName(lastName);
+			}
 
-	    	email = askForStringInput("Please enter your email address: ");
+			email = askForStringInput("Please enter your email address: ");
 
-	    	boolean emailIsValid = validateEmail(email);
+			boolean emailIsValid = validateEmail(email);
 
-	    	String [] userInfo = readInputFile(USERS_DB);
+			String [] userInfo = readInputFile(USERS_DB);
 
-	    	while ( !emailIsValid || checkExistingUser(email, userInfo) ) {
-	    	    if (checkExistingUser(email, userInfo)){
-		    		email = askForStringInput("Oops email already taken, please enter another email address: ");
-	    	    } else {
-		    		email = askForStringInput("Oops email is not valid, please re-try: ");
-		    	}	
+			while ( !emailIsValid || checkExistingUser(email, userInfo) ) {
+				if (checkExistingUser(email, userInfo)){
+					email = askForStringInput("Oops email already taken, please enter another email address: ");
+				} else {
+					email = askForStringInput("Oops email is not valid, please re-try: ");
+				}	
 				emailIsValid = validateEmail(email);
-	    	}
+			}
 
 
-	    	String password = askForStringInput("Please enter your password: ");	    	
-	    	String pswrdConfirm = askForStringInput("Please confirm your password: ");	    	
+			String password = askForPassword("Please enter your password: ");	    	
+			String pswrdConfirm = askForPassword("Please confirm your password: ");	    	
 
 			boolean isPassEqual = validatePassword(password, pswrdConfirm);
 
-	    	while (!isPassEqual) {
+			while (!isPassEqual) {
 
-	    		System.out.println("Passwords did not match, please enter them again.");
+				System.out.println("Passwords did not match, please enter them again.");
 
-	    		password = askForStringInput("Please enter your password: ");	    	
-	    		pswrdConfirm = askForStringInput("Please confirm your password: ");
+				password = askForPassword("Please enter your password: ");	    	
+				pswrdConfirm = askForPassword("Please confirm your password: ");
 
-	    		isPassEqual = validatePassword(password, pswrdConfirm);
-	    	}
+				isPassEqual = validatePassword(password, pswrdConfirm);
+			}
 
 
-	    	String storeUserResult = storeUser(email, password, firstName, lastName);
+			String storeUserResult = storeUser(email, password, firstName, lastName);
 
-	    	outputInfo(storeUserResult, USERS_DB); //Store User Info
+			outputInfo(storeUserResult, USERS_DB); //Store User Info
 
-	    	System.out.println("*-----------------------------*");
-	    	System.out.println("Account Created Successfully.");
-	    	System.out.println("*-----------------------------*");	    	
-	    	System.out.println("Please setup your profile...");
-		    		    		    	    	
+			System.out.println("*-----------------------------*");
+			System.out.println("Account Created Successfully.");
+			System.out.println("*-----------------------------*");	    	
+			System.out.println("Please setup your profile...");
+												
 			outputInfo(storeUserInfo(), PROFILES_DB); //Store User Profile Info.
 
 
-	    } else if (input.equals("n")) {
+		} else if (input.equals("n")) {
 
-	    	String email  = askForStringInput("Please enter your email address: ");
-	    	String password  = askForStringInput("Please enter your password: ");	    		    	
+			String email  = askForStringInput("Please enter your email address: ");
+			String password  = askForPassword("Please enter your password: ");	    		    	
 
-	    	//Check for existing user.
+			//Check for existing user.
 
-	    	String [] userInfo = readInputFile(USERS_DB);
+			String [] userInfo = readInputFile(USERS_DB);
 
-		 	boolean loginStatus = userLogIn(email, password, userInfo);
+			boolean loginStatus = userLogIn(email, password, userInfo);
 
-		 	if (loginStatus){
-		 		
-		 		System.out.println("You are logged in.");
+			if (loginStatus){
+				
+				System.out.println("You are logged in.");
 
-		 		printUserProfile(PROFILES_DB, email);
+				printUserProfile(PROFILES_DB, email);
 
-		 	} else {
-		 		System.out.println("Username or password did not match.");
-		 	}
-		 	
+			} else {
+				System.out.println("Username or password did not match.");
+			}
+			
 
-	    	
-	    } else {
+			
+		} else {
 
-	    	System.out.println("Please enter 'y' or 'n' ");
-	    }
+			System.out.println("Please enter 'y' or 'n' ");
+		}
 
 
 	}
@@ -121,8 +121,8 @@ public class Backend
 
 		String content = "";
 
-        try
-        {
+		try
+		{
 			Scanner textScanner = new Scanner(userDB);
 
 			while (textScanner.hasNextLine()){
@@ -130,11 +130,11 @@ public class Backend
 				content+=textScanner.nextLine();
 
 			}
-        }
-        catch (FileNotFoundException e)
-        {
-            e.printStackTrace();
-        }
+		}
+		catch (FileNotFoundException e)
+		{
+			e.printStackTrace();
+		}
 
 		records = content.split(";");
 
@@ -147,10 +147,10 @@ public class Backend
 		PrintWriter out = null;
 
 		try {
-		    out = new PrintWriter(new BufferedWriter(new FileWriter(filename, true)));
-		    out.write(record);
+			out = new PrintWriter(new BufferedWriter(new FileWriter(filename, true)));
+			out.write(record);
 		} catch (IOException e) {
-		    System.out.println("Oops something went wrong, could not save your data.");
+			System.out.println("Oops something went wrong, could not save your data.");
 		} finally {
 			if (out != null){
 				out.close();
@@ -186,9 +186,9 @@ public class Backend
 
 	 static String encryptPassword (String password){
 
-	 	String hashed = BCrypt.hashpw(password, BCrypt.gensalt());
+		String hashed = BCrypt.hashpw(password, BCrypt.gensalt());
 
-	 	return hashed;
+		return hashed;
 
 	 }
 
@@ -244,7 +244,7 @@ public class Backend
 
 	static boolean validateURL(String url){
 
-		if (url.matches("^(http://)?[w]{3}\\.[a-z]+(\\.[a-z]{2,3})$")){
+		if (url.matches("^(http://){1}([w]{3}\\.)?[a-z]+(\\.[a-z]{2,3})$")){
 			return true;
 		} 
 
@@ -283,93 +283,93 @@ public class Backend
 	//this method asks the user for profile info, validates it, and then stores it in a comma separated String
 	static String storeUserInfo() {
 			
-	    	 String twitterHandle = askForStringInput("Please enter your twitter handle (don't forget the '@'): ");
+			 String twitterHandle = askForStringInput("Please enter your twitter handle (don't forget the '@'): ");
 
-	    	 boolean inputIsValid = validateTwitterHandle(twitterHandle);
+			 boolean inputIsValid = validateTwitterHandle(twitterHandle);
 
-	    	 while (!inputIsValid){
+			 while (!inputIsValid){
 
-	    	 	twitterHandle = askForStringInput("Oops you made a mistake, please re-enter first your handle: ");
-	    	 	inputIsValid = validateTwitterHandle(twitterHandle);
-	    	 }	
+				twitterHandle = askForStringInput("Oops you made a mistake, please re-enter first your handle: ");
+				inputIsValid = validateTwitterHandle(twitterHandle);
+			 }	
 
-	    	 String ghUsername = askForStringInput("Please enter your GitHub username: ");
+			 String ghUsername = askForStringInput("Please enter your GitHub username: ");
 
-	    	 inputIsValid = validateGithubUserName(ghUsername);
+			 inputIsValid = validateGithubUserName(ghUsername);
 
-	    	 while (!inputIsValid){
+			 while (!inputIsValid){
 
-	    	 	ghUsername = askForStringInput("Oops you made a mistake, please re-enter your GitHub username: ");
-	    	 	inputIsValid = validateGithubUserName(ghUsername);
-	    	 }
+				ghUsername = askForStringInput("Oops you made a mistake, please re-enter your GitHub username: ");
+				inputIsValid = validateGithubUserName(ghUsername);
+			 }
 
-	    	String websiteName = askForStringInput("Please enter your website address: ");
+			String websiteName = askForStringInput("Please enter your website address: ");
 
-	    	inputIsValid = validateURL(websiteName);
+			inputIsValid = validateURL(websiteName);
 
-	    	while (!inputIsValid){
+			while (!inputIsValid){
 
-	    		websiteName = askForStringInput("Oops you made a mistake, please re-enter website address: ");
-	    		inputIsValid = validateURL(websiteName);
-	    	}
+				websiteName = askForStringInput("Oops you made a mistake, please re-enter website address: ");
+				inputIsValid = validateURL(websiteName);
+			}
 
-	    	String universityName = askForStringInput("Please enter your university name: ");
+			String universityName = askForStringInput("Please enter your university name: ");
 
-	    	inputIsValid = validateNameWithSpaces(universityName);
+			inputIsValid = validateNameWithSpaces(universityName);
 
-	    	while (!inputIsValid){
+			while (!inputIsValid){
 
-	    		universityName = askForStringInput("Oops you made a mistake, please re-enter your university name: ");
-	    		inputIsValid = validateNameWithSpaces(universityName);
-	    	}
+				universityName = askForStringInput("Oops you made a mistake, please re-enter your university name: ");
+				inputIsValid = validateNameWithSpaces(universityName);
+			}
 
-	    	String majorName = askForStringInput("Please enter your major name: ");
+			String majorName = askForStringInput("Please enter your major name: ");
 
-	    	inputIsValid = validateNameWithSpaces(majorName);
+			inputIsValid = validateNameWithSpaces(majorName);
 
-	    	while (!inputIsValid){
+			while (!inputIsValid){
 
-	    		majorName = askForStringInput("Oops you made a mistake, please re-enter your major name: ");
-	    		inputIsValid = validateNameWithSpaces(majorName);
-	    	}
+				majorName = askForStringInput("Oops you made a mistake, please re-enter your major name: ");
+				inputIsValid = validateNameWithSpaces(majorName);
+			}
 
-	    	String currentCompany = askForStringInput("Please enter your current company: ");
+			String currentCompany = askForStringInput("Please enter your current company: ");
 
-	    	inputIsValid = validateName(currentCompany);
+			inputIsValid = validateName(currentCompany);
 
-	    	while (!inputIsValid){
+			while (!inputIsValid){
 
-	    		currentCompany = askForStringInput("Oops you made a mistake, please re-enter current company: ");
-	    		inputIsValid = validateNameWithSpaces(currentCompany);
-	    	}
+				currentCompany = askForStringInput("Oops you made a mistake, please re-enter current company: ");
+				inputIsValid = validateNameWithSpaces(currentCompany);
+			}
 
-	    	String currentTitle = askForStringInput("Please enter your current title: ");
+			String currentTitle = askForStringInput("Please enter your current title: ");
 
-	    	inputIsValid = validateNameWithSpaces(currentTitle);
+			inputIsValid = validateNameWithSpaces(currentTitle);
 
-	    	while (!inputIsValid){
+			while (!inputIsValid){
 
-	    		currentTitle = askForStringInput("Oops you made a mistake, please re-enter your current title: ");
-	    		inputIsValid = validateNameWithSpaces(currentTitle);
-	    	}
+				currentTitle = askForStringInput("Oops you made a mistake, please re-enter your current title: ");
+				inputIsValid = validateNameWithSpaces(currentTitle);
+			}
 
-	    	String phoneNumber = askForStringInput("Please enter your phone number (use format: ###-###-####): ");
+			String phoneNumber = askForStringInput("Please enter your phone number (use format: ###-###-####): ");
 
-	    	inputIsValid = validatePhoneNumber(phoneNumber);
+			inputIsValid = validatePhoneNumber(phoneNumber);
 
-	    	while (!inputIsValid){
+			while (!inputIsValid){
 
-	    		phoneNumber = askForStringInput("Oops you made a mistake, please re-enter a valid phone number: ");
-	    		inputIsValid = validatePhoneNumber(phoneNumber);
-	    	}	
+				phoneNumber = askForStringInput("Oops you made a mistake, please re-enter a valid phone number: ");
+				inputIsValid = validatePhoneNumber(phoneNumber);
+			}	
 
-	    	String result = email+",twitter: "+twitterHandle+",";
+			String result = email+",twitter: "+twitterHandle+",";
 
-	    	result += "Github: "+ghUsername+",Website: "+websiteName+",";
+			result += "Github: "+ghUsername+",Website: "+websiteName+",";
 
-	    	result += "University: "+universityName+",Major: "+majorName+",Company: "+currentCompany+",";
-	    	
-	    	result += "Title: "+currentTitle+",Phone: "+phoneNumber+";";
+			result += "University: "+universityName+",Major: "+majorName+",Company: "+currentCompany+",";
+			
+			result += "Title: "+currentTitle+",Phone: "+phoneNumber+";";
 
 		 return result; 
 	}
@@ -415,13 +415,13 @@ public class Backend
 
 	static String askForStringInput(String message){
 
-	    Scanner scanner = new Scanner(System.in);
+		Scanner scanner = new Scanner(System.in);
 
 		System.out.print(message);
 
-	    String input = scanner.nextLine();
+		String input = scanner.nextLine();
 
-	    return input;
+		return input;
 
 	}
 
@@ -432,6 +432,21 @@ public class Backend
 		}
 
 		return word;
+	}
+
+	static public String askForPassword(String message) {  
+
+		Console console = System.console();
+		
+		if (console == null) {
+			System.out.println("Couldn't get Console instance");
+			System.exit(0);
+		}
+
+		char passwordArray[] = console.readPassword(message);
+
+		return new String(passwordArray);
+
 	}
 
 }
