@@ -150,7 +150,7 @@ public class Backend
 		    out = new PrintWriter(new BufferedWriter(new FileWriter(filename, true)));
 		    out.write(record);
 		} catch (IOException e) {
-		    System.out.println("Sorry something went wrong, could not save your data.");
+		    System.out.println("Oops something went wrong, could not save your data.");
 		} finally {
 			if (out != null){
 				out.close();
@@ -201,7 +201,6 @@ public class Backend
 		}
 
 	}	 	
-
 
 	//Validation-----------------------
 	static boolean validateEmail (String email) { 
@@ -254,13 +253,6 @@ public class Backend
 	}
 
 	static boolean validateNameWithSpaces(String input){
-		//Validates the following...
-		// university name
-		// major name
-		// company name
-		// current title
-
-		//[\\w\\.\\s_]+[\\w]
 
 		if (input.matches("^[\\w\\.\\s_]+[\\w\\.]+$")){
 			return true;
@@ -279,7 +271,6 @@ public class Backend
 		return  false;
 
 	}		
-
 
 	static String storeUser(String email, String password, String firstName, String lastName) {
 
@@ -413,17 +404,13 @@ public class Backend
 			userInfo = records[i].split(",");
 
 			if (email.equals(userInfo[0])){
-				//return true;
+			
 				for (int j=1; j < userInfo.length; j++ ){
 					System.out.println(userInfo[j]);
 				}
 
 			} 
 		}
-
-		//return false;
-
-
 	}
 
 	static String askForStringInput(String message){
