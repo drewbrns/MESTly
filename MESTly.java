@@ -68,7 +68,11 @@ public class MESTly
 
 			while (!isPassEqual) {
 
-				System.out.println("Passwords did not match, please enter them again.");
+				if (password == null || password.isEmpty()){
+					System.out.println("Passwords cannot be empty, please enter them again.");
+				} else {
+					System.out.println("Passwords did not match, please try again.");
+				} 
 
 				password = askForPassword("Please enter your password: ");	    	
 				pswrdConfirm = askForPassword("Please confirm your password: ");
@@ -241,8 +245,13 @@ public class MESTly
 	//use this method to check if the two user entered passwords are the same
 	static boolean validatePassword (String password1, String password2) { 
 
-		if (password1.equals(password2)){
-			return true;
+		if (password1 != null && !password1.isEmpty()){
+
+			if (password1.equals(password2)){
+				return true;
+			} else {
+				return false;
+			}
 		}
 
 		return false;
@@ -447,4 +456,3 @@ public class MESTly
 	}
 
 }
-
