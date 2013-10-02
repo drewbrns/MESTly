@@ -6,7 +6,6 @@ public class MESTly
 
 	static final String USERS_DB = "users.csv";
 	static final String PROFILES_DB = "info.csv";
-	static public String email = "";
 
 	public static void main(String[] args) {
 		
@@ -45,7 +44,7 @@ public class MESTly
 				nameIsValid = validateAlpha(lastName);
 			}
 
-			email = askForStringInput("Please enter your email address: ");
+			String email = askForStringInput("Please enter your email address: ");
 
 			boolean emailIsValid = validateEmail(email);
 
@@ -89,8 +88,10 @@ public class MESTly
 			System.out.println("Account Created Successfully.");
 			System.out.println("*-----------------------------*");	    	
 			System.out.println("Please setup your profile...");
-												
-			outputInfo(storeUserInfo(), PROFILES_DB); //Store User Profile Info.
+					
+			String profile = email + storeUserInfo();
+
+			outputInfo(profile, PROFILES_DB); //Store User Profile Info.
 
 			System.out.println("Thank you for signing up.");
 
@@ -369,7 +370,7 @@ public class MESTly
 				inputIsValid = validatePhoneNumber(phoneNumber);
 			}	
 
-			String result = email+",Twitter: "+twitterHandle+",";
+			String result = ",Twitter: "+twitterHandle+",";
 
 			result += "Github: "+ghUsername+",Website: "+websiteName+",";
 
