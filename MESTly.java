@@ -10,6 +10,13 @@ public class MESTly
 
 	public static void main(String[] args) {
 		
+		userMenu();
+
+		System.exit(0);
+	}
+
+	static void userMenu()
+	{
 		System.out.print("Are you a new user (y / n)?: ");
 
 		Scanner scanner = new Scanner(System.in);
@@ -24,7 +31,7 @@ public class MESTly
 
 			while (!nameIsValid){
 
-				firstName = askForStringInput("Oops you made a mistake, please re-enter first your name:");
+				firstName = askForStringInput("Oops you made a mistake, please re-enter first your name: ");
 				nameIsValid = validateAlpha(firstName);
 			}
 
@@ -34,7 +41,7 @@ public class MESTly
 
 			while (!nameIsValid){
 
-				lastName = askForStringInput("Oops you made a mistake, please re-enter last your name:");
+				lastName = askForStringInput("Oops you made a mistake, please re-enter last your name: ");
 				nameIsValid = validateAlpha(lastName);
 			}
 
@@ -107,9 +114,7 @@ public class MESTly
 		} else {
 
 			System.out.println("Please enter 'y' or 'n' ");
-		}
-
-		System.exit(0);
+		}		
 	}
 
 	static String [] readInputFile (String filename) { 
@@ -275,7 +280,7 @@ public class MESTly
 	//this method asks the user for profile info, validates it, and then stores it in a comma separated String
 	static String storeUserInfo() {
 			
-			 String twitterHandle = askForStringInput("Please enter your twitter handle (don't forget the '@'): ");
+			 String twitterHandle = askForStringInput("Please enter your twitter handle: ");
 
 			 boolean inputIsValid = validateAlphaNum(twitterHandle);
 
