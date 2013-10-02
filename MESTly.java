@@ -205,7 +205,7 @@ public class MESTly
 	//use this method to validate twitter and github
 	static boolean validateAlphaNum(String input) { 
 
-		if (input.matches("^@?[a-zA-Z0-9_\\.]+")){
+		if (input.matches("[a-zA-Z0-9_\\.]+")){
 			return true;
 		} 
 
